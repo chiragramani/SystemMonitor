@@ -99,6 +99,7 @@ float LinuxParser::MemoryUtilization() {
   return 0.0; 
 }
 
+// Returning the uptime
 long LinuxParser::UpTime() { 
   string line, upTimeString;
   std::ifstream filestream(kProcDirectory + kUptimeFilename);
@@ -124,7 +125,7 @@ long LinuxParser::ActiveJiffies() { return 0; }
 // TODO: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() { return 0; }
 
-// TODO: Read and return CPU utilization
+// Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { 
   string line;
   std::ifstream filestream(kProcDirectory + kStatFilename);
@@ -145,6 +146,7 @@ vector<string> LinuxParser::CpuUtilization() {
   return {};
 }
 
+// Reads and returns total processes
 int LinuxParser::TotalProcesses() { 
   string line;
   std::ifstream filestream(kProcDirectory + kStatFilename);
@@ -161,6 +163,7 @@ int LinuxParser::TotalProcesses() {
   return 0;
  }
 
+// Reads and returns running processes
 int LinuxParser::RunningProcesses() { 
   string line;
   std::ifstream filestream(kProcDirectory + kStatFilename);
@@ -177,7 +180,7 @@ int LinuxParser::RunningProcesses() {
   return 0;
  }
 
-
+// Returns the command
 string LinuxParser::Command(int pid) {
   string line;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kCmdlineFilename);
@@ -188,6 +191,7 @@ string LinuxParser::Command(int pid) {
   return string();
  }
 
+// Returns the RAM
 string LinuxParser::Ram(int pid) { 
   string line;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatusFilename);
@@ -206,6 +210,7 @@ string LinuxParser::Ram(int pid) {
   return string();
 }
 
+// Returns the process's UID
 string LinuxParser::Uid(int pid) { 
   string line;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatusFilename);
@@ -222,6 +227,7 @@ string LinuxParser::Uid(int pid) {
   return string();
 }
 
+// Returns the user associated with the PID
 string LinuxParser::User(int pid) { 
   const string userId = LinuxParser::Uid(pid);
   string line;
@@ -241,6 +247,7 @@ string LinuxParser::User(int pid) {
 
 }
 
+// Returns the processor's uptime
 long LinuxParser::UpTime(int pid) { 
   string line;
   std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatFilename);
@@ -263,6 +270,7 @@ long LinuxParser::UpTime(int pid) {
   return 0;
 }
 
+// Returns the ProcessCPUInfo
 LinuxParser::ProcessCPUInfo LinuxParser::CpuUtilization(int pid) {
   LinuxParser::ProcessCPUInfo cpuInfo;
   string line;

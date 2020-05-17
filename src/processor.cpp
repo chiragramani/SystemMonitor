@@ -4,10 +4,11 @@
 #include "utils.h"
 using std::vector;
 
+// Constructor
 Processor::Processor() : _previousTotalCPUTime(0.0), _previousIdleCPUTime(0.0) {}
 
+// Returns the processor's utilization
 float Processor::Utilization() {
-  
   vector<long> aggregatedValues = Utils::convertToLong(LinuxParser::CpuUtilization());
   if (aggregatedValues.size() == 10) {
     // Not considering guest and guest_nice times since they are already included in the user and nice times.

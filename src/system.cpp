@@ -15,11 +15,14 @@ using std::string;
 using std::vector;
 
 Processor& System::Cpu() { return cpu_; }
+
+// Constructor
 System::System() {
  kernel_ = LinuxParser::Kernel();
  operatingSystem_= LinuxParser::OperatingSystem();
 } 
 
+// Processes
 vector<Process>& System::Processes() { 
   processes_.clear();
   const vector<int> pids = LinuxParser::Pids();
@@ -30,14 +33,20 @@ vector<Process>& System::Processes() {
   return processes_;
 }
 
+// Kernel
 std::string System::Kernel() { return kernel_; }
 
+// MemoryUtilization
 float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(); }
 
+// OperatingSystem
 std::string System::OperatingSystem() { return operatingSystem_; }
 
+// RunningProcesses
 int System::RunningProcesses() { return LinuxParser::RunningProcesses(); }
 
+// TotalProcesses
 int System::TotalProcesses() { return LinuxParser::TotalProcesses() ; }
 
+// UpTime
 long int System::UpTime() { return LinuxParser::UpTime(); }
